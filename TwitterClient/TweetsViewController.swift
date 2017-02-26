@@ -28,6 +28,8 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         tableview.rowHeight = UITableViewAutomaticDimension
         tableview.estimatedRowHeight = 120
         
+        
+        
         let titleImageView = UIImageView.init(image: #imageLiteral(resourceName: "TwitterLogoBlue"))
         titleImageView.frame = CGRect(x:0, y:0, width: 34, height: 34)
         titleImageView.contentMode = .scaleAspectFit
@@ -50,8 +52,9 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         })
         
         
-        
-        
+        if(TwitterClient.offset != 20) {
+            TwitterClient.offset = 20
+        }
         // Do any additional setup after loading the view.
     }
 
@@ -105,6 +108,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             let scrollOffsetThreshold = scrollViewContentHeight - tableview.bounds.size.height
             
             if(scrollView.contentOffset.y > scrollOffsetThreshold && tableview.isDragging) {
+                print("reload\(TwitterClient.offset)")
                 isMoreDataLoading = true
                 loadMoreData()
                 tableview.reloadData()
@@ -113,6 +117,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
         
     func loadMoreData() {
+        print(TwitterClient.offset)
         if(TwitterClient.offset < 200) {
             TwitterClient.offset += 10
         }
