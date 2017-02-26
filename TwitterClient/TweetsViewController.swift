@@ -32,6 +32,9 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
         self.navigationItem.titleView = titleImageView
         
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(_refreshControl:)), for: UIControlEvents.valueChanged)
+        tableview.insertSubview(refreshControl, at: 0)
         
         TwitterClient.sharedInstance?.homeTimeLine(success: { (tweets) in
             
@@ -80,7 +83,17 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
-    
+    func refreshControlAction(_refreshControl: UIRefreshControl) {
+        TwitterClient.sharedInstance?.homeTimeLine(success: { (tweets) in
+            self.tweets = tweets
+            print(tweets)
+            self.tableview.reloadData()
+            _refreshControl.endRefreshing()
+        }, failure: { (error) in
+            TwitterClient.sharedInstance?.loginFailure!(error)
+            print(error.localizedDescription)
+        })
+    }
     
     /*
     // MARK: - Navigation
