@@ -8,11 +8,13 @@
 
 import UIKit
 
-class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
     
 
     @IBOutlet weak var tableview: UITableView!
     var tweets : [Tweet]?
+    
+    var isMoreDataLoading = false
     
     override func viewDidLoad() {
         
@@ -89,6 +91,38 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             print(tweets)
             self.tableview.reloadData()
             _refreshControl.endRefreshing()
+        }, failure: { (error) in
+            TwitterClient.sharedInstance?.loginFailure!(error)
+            print(error.localizedDescription)
+        })
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (!isMoreDataLoading) {
+            //isMoreDataLoading = true
+            
+            let scrollViewContentHeight = tableview.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - tableview.bounds.size.height
+            
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && tableview.isDragging) {
+                isMoreDataLoading = true
+                loadMoreData()
+                tableview.reloadData()
+            }
+        }
+    }
+        
+    func loadMoreData() {
+        if(TwitterClient.offset < 200) {
+            TwitterClient.offset += 10
+        }
+        
+        TwitterClient.sharedInstance?.loadMore(success: { (tweets) in
+            
+            self.tweets = tweets
+            print(tweets)
+            self.isMoreDataLoading = false
+            self.tableview.reloadData()
         }, failure: { (error) in
             TwitterClient.sharedInstance?.loginFailure!(error)
             print(error.localizedDescription)

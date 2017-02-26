@@ -11,7 +11,7 @@ import BDBOAuth1Manager
 
 class TwitterClient: BDBOAuth1SessionManager {
     
-    
+    static var offset = 20
     
     static let sharedInstance = TwitterClient(baseURL: NSURL(string: "https://api.twitter.com")! as URL!, consumerKey: "k258rh8AYrn9LowdWzi3b6NEG", consumerSecret: "QF3aruCufi2MUH0QxXjNSYVfv9vBtAMJFc0LA5C85hBxbZzxkx")
     
@@ -76,6 +76,20 @@ class TwitterClient: BDBOAuth1SessionManager {
             print(error.localizedDescription)
         })
        
+    }
+    
+    func loadMore(success:  @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
+
+        get("1.1/statuses/home_timeline.json?count=\(TwitterClient.offset)", parameters: nil, progress: nil, success: { (task, response) in
+            let dictionaries = response as! [NSDictionary]
+            
+            let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries)
+            success(tweets)
+            
+        }, failure: { (task, error) in
+            print(error.localizedDescription)
+        })
+        
     }
     
     func currentAccount(success: @escaping (User) -> (), failure:@escaping (Error)-> ()) {
