@@ -23,6 +23,8 @@ class TwitterClient: BDBOAuth1SessionManager {
         loginSuccess = success
         loginFailure = failure
         
+        
+        
         fetchRequestToken(withPath: "oauth/request_token", method: "GET", callbackURL: NSURL(string: "twitterclient://oauth") as URL!, scope: nil, success:
             { (requestToken) in
                 if let token = requestToken?.token {
@@ -35,6 +37,7 @@ class TwitterClient: BDBOAuth1SessionManager {
             self.loginFailure?(error!)
         })
     }
+    
     
     func logout() {
         User.currentUser = nil
@@ -68,8 +71,9 @@ class TwitterClient: BDBOAuth1SessionManager {
             
             let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries)
             success(tweets)
+            
         }, failure: { (task, error) in
-            failure(error)
+            print(error.localizedDescription)
         })
        
     }
@@ -86,7 +90,7 @@ class TwitterClient: BDBOAuth1SessionManager {
            
         }, failure: { (task, error) in
             
-            failure(error)
+            print(error.localizedDescription)
             
         })
 

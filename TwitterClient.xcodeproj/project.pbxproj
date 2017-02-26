@@ -170,6 +170,7 @@
 				TargetAttributes = {
 					8D6110B41E5CC14300AA6113 = {
 						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = 2Z3RVPUMTU;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -386,6 +387,7 @@
 			baseConfigurationReference = BEB8451CD95C77B69A762CFB /* Pods-TwitterClient.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2Z3RVPUMTU;
 				INFOPLIST_FILE = TwitterClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GajeelSF.TwitterClient;
@@ -399,6 +401,7 @@
 			baseConfigurationReference = 9AC9CF5B8651DEA1C3AC5204 /* Pods-TwitterClient.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 2Z3RVPUMTU;
 				INFOPLIST_FILE = TwitterClient/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = GajeelSF.TwitterClient;

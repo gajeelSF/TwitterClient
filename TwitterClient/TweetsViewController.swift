@@ -18,18 +18,35 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
         super.viewDidLoad()
 
+        
+    
         tableview.delegate = self
         tableview.dataSource = self
         
+        tableview.rowHeight = UITableViewAutomaticDimension
+        tableview.estimatedRowHeight = 120
+        
+        let titleImageView = UIImageView.init(image: #imageLiteral(resourceName: "TwitterLogoBlue"))
+        titleImageView.frame = CGRect(x:0, y:0, width: 34, height: 34)
+        titleImageView.contentMode = .scaleAspectFit
+        
+        self.navigationItem.titleView = titleImageView
+        
+        
         TwitterClient.sharedInstance?.homeTimeLine(success: { (tweets) in
             
-            self.tweets = tweets
-        
             
+            self.tweets = tweets
+            print(tweets)
+            self.tableview.reloadData()
         }, failure: { (error) in
             TwitterClient.sharedInstance?.loginFailure!(error)
             print(error.localizedDescription)
         })
+        
+        
+        
+        
         // Do any additional setup after loading the view.
     }
 
@@ -46,9 +63,10 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableview.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
-        if let tweets = tweets {
-            cell.tweet = tweets[indexPath.row]
-        }
+        
+        print(self.tweets?[indexPath.row])
+            cell.tweet = self.tweets?[indexPath.row]
+        
         
         return cell
     }
