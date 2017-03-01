@@ -34,6 +34,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.rootViewController = vc
         }
         
+        window = UIWindow(frame: UIScreen.main.bounds)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let tweetNavigationController = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationController") as! UINavigationController
+        tweetNavigationController.tabBarItem.title = "Tweets"
+        
+        let UserNavigationController = storyboard.instantiateViewController(withIdentifier: "UserNavigationController") as! UINavigationController
+        let UserViewController = UserNavigationController.topViewController as! UserViewController
+        UserViewController.user = User.currentUser
+        UserNavigationController.tabBarItem.title = "User"
+        
+        let tabBarController = UITabBarController()
+        tabBarController.viewControllers = [tweetNavigationController, UserNavigationController]
+        
+        window?.rootViewController = tabBarController
+        window?.makeKeyAndVisible()
+        
         return true
     }
 

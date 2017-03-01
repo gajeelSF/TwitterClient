@@ -134,6 +134,10 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         })
     }
     
+    @IBAction func onEditButton(_ sender: Any) {
+        self.performSegue(withIdentifier: "postSegue", sender: nil)
+    }
+
     /*
     // MARK: - Navigation
 

@@ -107,6 +107,15 @@ class TwitterClient: BDBOAuth1SessionManager {
             print(error.localizedDescription)
             
         })
-
+    }
+    
+    func postTweet(content: String) {
+        let parameters = ["status": content]
+        post("1.1/statuses/update.json", parameters: parameters, progress: nil, success: { (task, response) in
+            print("oh successfully post!")
+        }) { (task, error) in
+            
+            print(error.localizedDescription)
+        }
     }
 }

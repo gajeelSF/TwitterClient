@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D352A7A1E66615C002C86BA /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D352A791E66615C002C86BA /* UserViewController.swift */; };
+		8D352A7C1E668CCD002C86BA /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D352A7B1E668CCD002C86BA /* ComposeViewController.swift */; };
 		8D6110B91E5CC14400AA6113 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6110B81E5CC14400AA6113 /* AppDelegate.swift */; };
 		8D6110BE1E5CC14400AA6113 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D6110BC1E5CC14400AA6113 /* Main.storyboard */; };
 		8D6110C01E5CC14400AA6113 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D6110BF1E5CC14400AA6113 /* Assets.xcassets */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8D352A791E66615C002C86BA /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		8D352A7B1E668CCD002C86BA /* ComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
 		8D6110B51E5CC14300AA6113 /* TwitterClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D6110B81E5CC14400AA6113 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D6110BD1E5CC14400AA6113 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -107,6 +111,8 @@
 			children = (
 				8D6110CA1E5CCD9D00AA6113 /* LoginViewController.swift */,
 				8D6110D51E5FB2B000AA6113 /* TweetsViewController.swift */,
+				8D352A791E66615C002C86BA /* UserViewController.swift */,
+				8D352A7B1E668CCD002C86BA /* ComposeViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -259,7 +265,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D352A7C1E668CCD002C86BA /* ComposeViewController.swift in Sources */,
 				8D6110CF1E5F882A00AA6113 /* User.swift in Sources */,
+				8D352A7A1E66615C002C86BA /* UserViewController.swift in Sources */,
 				8D6110DB1E5FE58C00AA6113 /* TweetCell.swift in Sources */,
 				8D6110D11E5F883E00AA6113 /* Tweet.swift in Sources */,
 				8D6110CB1E5CCD9D00AA6113 /* LoginViewController.swift in Sources */,
