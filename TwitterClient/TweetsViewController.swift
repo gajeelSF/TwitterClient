@@ -11,6 +11,8 @@ import UIKit
 class TweetsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate {
     
 
+    static var successfulTweeted = false as Bool!
+    
     @IBOutlet weak var tableview: UITableView!
     var tweets : [Tweet]?
     
@@ -55,6 +57,11 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         if(TwitterClient.offset != 20) {
             TwitterClient.offset = 20
         }
+        
+        if(TweetsViewController.successfulTweeted)! {
+            self.refreshControlAction(_refreshControl: refreshControl)
+            TweetsViewController.successfulTweeted = false;
+        }
         // Do any additional setup after loading the view.
     }
 
@@ -72,8 +79,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
         let cell = tableview.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
         
-        print(self.tweets?[indexPath.row])
-            cell.tweet = self.tweets?[indexPath.row]
+        cell.tweet = self.tweets?[indexPath.row]
         
         
         return cell
@@ -136,6 +142,18 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBAction func onEditButton(_ sender: Any) {
         self.performSegue(withIdentifier: "postSegue", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        let indexPath = tableview.indexPath(for: cell)
+        let dictionary = tweets![indexPath!.row]
+        let detailViewController = segue.destination as! TweetDetailViewController
+        
+        detailViewController.dictionary = dictionary
+        detailViewController.retweeted = dictionary.retweeted
+        detailViewController.favorated = dictionary.favorated
+        
     }
 
     /*

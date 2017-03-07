@@ -26,9 +26,13 @@ class ComposeViewController: UIViewController {
     
     @IBAction func onPostClick(_ sender: Any) {
         TwitterClient.sharedInstance?.postTweet(content: content.text!)
+        TweetsViewController.successfulTweeted = true
         self.performSegue(withIdentifier: "postFinishSegue", sender: nil)
     }
     
+    @IBAction func onBackClick(_ sender: Any) {
+        self.performSegue(withIdentifier: "postFinishSegue", sender: nil)
+    }
 
     /*
     // MARK: - Navigation

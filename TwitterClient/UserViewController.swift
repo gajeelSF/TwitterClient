@@ -13,6 +13,7 @@ class UserViewController: UIViewController {
     var user :User?
     @IBOutlet weak var userImage: UIImageView!
     
+
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var trueNameLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
@@ -21,7 +22,11 @@ class UserViewController: UIViewController {
         
         super.viewDidLoad()
         
-        userImage.setImageWith((user?.profileURL)! as URL)
+        print(self)
+    
+        
+        
+             userImage.setImageWith((user?.profileURL)! as URL)
         if let backgroundURL = user?.backgroundURL {
             backgroundImage.setImageWith(backgroundURL as URL)
         }
@@ -31,14 +36,18 @@ class UserViewController: UIViewController {
         }
 
         descriptionLabel.text = user?.userDescription
+        
         print(user?.description)
-        // Do any additional setup after loading the view.
+        
+        
+               // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
 
     /*

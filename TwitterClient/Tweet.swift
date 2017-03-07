@@ -9,7 +9,9 @@
 import UIKit
 
 class Tweet: NSObject {
-    
+    var ID : String?
+    var favorated: Bool?
+    var retweeted: Bool?
     
     var user : NSDictionary?
     var text : String?
@@ -21,14 +23,18 @@ class Tweet: NSObject {
     
     init(dictionary: NSDictionary) {
         
+        ID = dictionary["id_str"] as? String
+        
         text = dictionary["text"] as? String
         retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
         
+        retweeted = dictionary["retweeted"] as? Bool
+    
         
-        
+        favorated = dictionary["favorited"] as? Bool
         
         user = dictionary["user"] as? NSDictionary
-        favoratesCount = (user?["favourites_count"] as? Int) ?? 0
+        favoratesCount = (dictionary["favorite_count"] as? Int) ?? 0
         
         let profileURLStrinig = user?["profile_image_url_https"] as? String
         

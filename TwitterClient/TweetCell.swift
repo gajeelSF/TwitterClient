@@ -10,8 +10,6 @@ import UIKit
 
 class TweetCell: UITableViewCell {
 
-    var retweeted: Bool = false
-    var favorated: Bool = false
     var tweet : Tweet! {
         didSet {
             //print(tweet.user)
@@ -50,11 +48,11 @@ class TweetCell: UITableViewCell {
     
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var retweetLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var favorateButton: UIButton!
+    @IBOutlet weak var retweetButton: UIButton!
     
     override func awakeFromNib() {
         
@@ -70,15 +68,16 @@ class TweetCell: UITableViewCell {
     }
     
     @IBAction func onFavorate(_ sender: Any) {
-        if(!favorated) {
-            
+        if(!tweet.favorated!) {
+            tweet.favorated = true
+            TwitterClient.sharedInstance?.favorate(ID: tweet.ID!)
             tweet.favoratesCount = tweet.favoratesCount! + 1
-            favorated = true
             favorateButton.setImage(#imageLiteral(resourceName: "favor-icon-red"), for: UIControlState.normal)
         }
         else {
+            tweet.favorated = false
+            TwitterClient.sharedInstance?.unfavorate(ID: tweet.ID!)
             tweet.favoratesCount = tweet.favoratesCount! - 1
-            favorated = false
             favorateButton.setImage(#imageLiteral(resourceName: "favor-icon"), for: UIControlState.normal)
         }
         favorateLabel.text = tweet.favoratesCount?.description
@@ -87,12 +86,14 @@ class TweetCell: UITableViewCell {
 
     
     @IBAction func onRetweet(_ sender: Any) {
-        if(!retweeted) {
+        if(!tweet.retweeted!) {
+            tweet.retweeted = true
             tweet.retweetCount = tweet.retweetCount! + 1
-            retweeted = true
+            retweetButton.setImage(#imageLiteral(resourceName: "retweet-icon-green"), for: UIControlState.normal)
         }
         else {
-            retweeted = false
+            tweet.retweeted = false
+            retweetButton.setImage(#imageLiteral(resourceName: "retweet-icon"), for: UIControlState.normal)
             tweet.retweetCount = tweet.retweetCount! - 1
         }
         

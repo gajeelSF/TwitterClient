@@ -23,6 +23,7 @@ class User: NSObject {
     var followerCount: Int?
     var followingCount: Int?
     
+    var id : String?
     
     
     static let userLogoutNotification = "UserDidLogout"
@@ -50,6 +51,7 @@ class User: NSObject {
         postCount = dictionary["statuses_count"] as? Int
         
         userDescription = dictionary["description"] as? String
+        id = dictionary["id_str"] as? String
     }
     
     static var _currentUser: User?

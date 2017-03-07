@@ -39,11 +39,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let tweetNavigationController = storyboard.instantiateViewController(withIdentifier: "TweetsNavigationController") as! UINavigationController
         tweetNavigationController.tabBarItem.title = "Tweets"
+        tweetNavigationController.tabBarItem.image = #imageLiteral(resourceName: "home-icon")
         
         let UserNavigationController = storyboard.instantiateViewController(withIdentifier: "UserNavigationController") as! UINavigationController
         let UserViewController = UserNavigationController.topViewController as! UserViewController
         UserViewController.user = User.currentUser
         UserNavigationController.tabBarItem.title = "User"
+        UserNavigationController.tabBarItem.image = #imageLiteral(resourceName: "account-icon")
         
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [tweetNavigationController, UserNavigationController]

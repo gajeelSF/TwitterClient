@@ -45,6 +45,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: User.userLogoutNotification), object: nil)
     }
+    
     func handleOpenURL(url: URL) {
         let requestToken = BDBOAuth1Credential(queryString: url.query)
         
@@ -60,8 +61,7 @@ class TwitterClient: BDBOAuth1SessionManager {
             print("access error")
             self.loginFailure?(error!)
         })
-        
-        
+
 
     }
     
@@ -77,6 +77,22 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
        
     }
+    
+    
+    func loadUserTweets(id: String,success:  @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
+        let parameters = ["user_id": id]
+        get("1.1/statuses/user_timeline.json", parameters: parameters, progress: nil, success: { (task, response) in
+            let dictionaries = response as! [NSDictionary]
+            print("success user data")
+            let tweets = Tweet.tweetsWithArray(dictionaries: dictionaries)
+            success(tweets)
+            
+        }, failure: { (task, error) in
+            print(error.localizedDescription)
+        })
+        
+    }
+
     
     func loadMore(success:  @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
 
@@ -118,4 +134,44 @@ class TwitterClient: BDBOAuth1SessionManager {
             print(error.localizedDescription)
         }
     }
+    
+    func favorate(ID: String) {
+        let parameters = ["id": ID]
+        post("1.1/favorites/create.json", parameters: parameters, progress: nil, success: { (task, response) in
+            print("favorate successfully")
+        }) { (take, error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    func unfavorate(ID: String) {
+        let parameters = ["id": ID]
+        post("1.1/favorites/destroy.json", parameters: parameters, progress: nil, success: { (task, response) in
+            print("unfavorate successfully")
+        }) { (take, error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    func retweet(ID: String) {
+        let parameters = ["id": ID]
+        post("1.1/statuses/retweet/:id.json", parameters: parameters, progress: nil, success: { (task, response) in
+            print("retweet successfully")
+        }) { (take, error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    func unretweet(ID: String) {
+        let parameters = ["id": ID]
+        post("1.1/statuses/unretweet/:id.json", parameters: parameters, progress: nil, success: { (task, response) in
+            print("unretweet successfully")
+        }) { (take, error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    
+    
+    
 }
