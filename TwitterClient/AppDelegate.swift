@@ -26,6 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let vc = stodyboard.instantiateViewController(withIdentifier: "TweetsNavigationController")
             window?.rootViewController = vc
         }
+        else {
+            print("not current user")
+        }
         
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: User.userLogoutNotification), object: nil, queue: OperationQueue.main) { (notification) in
             let stodyboard = UIStoryboard(name: "Main",

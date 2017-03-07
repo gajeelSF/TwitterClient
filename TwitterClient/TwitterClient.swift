@@ -23,7 +23,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         loginSuccess = success
         loginFailure = failure
         
-        
+        deauthorize()
         
         fetchRequestToken(withPath: "oauth/request_token", method: "GET", callbackURL: NSURL(string: "twitterclient://oauth") as URL!, scope: nil, success:
             { (requestToken) in

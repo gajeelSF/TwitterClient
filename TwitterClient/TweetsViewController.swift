@@ -145,6 +145,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (sender != nil) {
         let cell = sender as! UITableViewCell
         let indexPath = tableview.indexPath(for: cell)
         let dictionary = tweets![indexPath!.row]
@@ -153,7 +154,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         detailViewController.dictionary = dictionary
         detailViewController.retweeted = dictionary.retweeted
         detailViewController.favorated = dictionary.favorated
-        
+        }
     }
 
     /*

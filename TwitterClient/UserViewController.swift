@@ -26,7 +26,7 @@ class UserViewController: UIViewController {
     
         
         
-             userImage.setImageWith((user?.profileURL)! as URL)
+        userImage.setImageWith((user?.profileURL)! as URL)
         if let backgroundURL = user?.backgroundURL {
             backgroundImage.setImageWith(backgroundURL as URL)
         }
